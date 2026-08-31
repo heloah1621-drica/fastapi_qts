@@ -14,12 +14,15 @@ from app.faturamento.cobranca import processar_cobranca
 
     ],
 )
-def test_calcular_faruramento(
-    valor_base,dias_atraso, valor_esperado
-):
-    assert (
-        processar_cobranca(valor_base,dias_atraso) == valor_esperado
-    )
+def test_calcular_faruramento(valor_base,dias_atraso, valor_esperado):
+    assert processar_cobranca(valor_base,dias_atraso) == valor_esperado
+
+def test_valores_cobranca_validos():
+    assert processar_cobranca(100.0,"PREMIUM", 0) == 90.0
+    assert processar_cobranca(100.0,"EMPRESARIAL", 0) == 80.0
+    assert processar_cobranca(100.0,"PREMIUM", 0) == 95.45
+    assert processar_cobranca(100.0,"BASICO", 0) == 156.00
+
 
 import time
 
